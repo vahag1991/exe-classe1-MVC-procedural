@@ -85,7 +85,7 @@ N'oubliez pas les requêtes préparées et les protections des champs utilisateu
 
 ### Créez un design minimalist avec bootstrap
 
-Vous êtes libre de faire un design responsive de votre choix !
+Vous êtes libre de faire un design responsive de votre choix ! mettez le dossier en test dans datas.
 
 Bon travail !
 
