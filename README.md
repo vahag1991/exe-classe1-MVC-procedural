@@ -88,3 +88,11 @@ N'oubliez pas les requêtes préparées et les protections des champs utilisateu
 Vous êtes libre de faire un design responsive de votre choix !
 
 Bon travail !
+
+## Partie 2
+
+Création d'un CRUD complet sur la page d'administration. 
+
+### CRUD pour Create Read Update Delete 
+
+Ce seront toutes les actions possible pour l'administration 
