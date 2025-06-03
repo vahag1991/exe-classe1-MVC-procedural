@@ -2,7 +2,7 @@
 
 ## Configuration
 
-Créez un fork de se dépot, ensuite créez une branche et un dossier dans le dossier stagiaire, vous y mettrez votre dossier avec votre prénom. Copiez les fichiers du dépot dedans SANS modifier mes fichiers !
+Créez un fork de ce dépôt, ensuite créez une branche et un dossier dans le dossier stagiaires avec votre prénom. Copiez les fichiers du dépôt dedans SANS modifier mes fichiers !
 
 Importation du fichier `data\crud_mvc_procedural_structure_v1_datas.sql` dans votre base de données MariaDB.
 
