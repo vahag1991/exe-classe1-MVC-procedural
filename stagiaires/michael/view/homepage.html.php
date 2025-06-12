@@ -157,10 +157,30 @@ License: https://freebootstrap.net/license
         <section class="section faq__v2" id="faq">
             <div class="container">
                 <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Nos derniers articles</span>
-                        <h2 class="h2 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0">Il y a X article(s)</h2>
+                <?php
+                // on compte le nombre d'articles
+                $nbArticles = count($articles);
+                // si pas d'articles
+                if(empty($nbArticles)):
+                    $h3 = "Pas encore d'article";
+                else:
+                    // si on plus d'un article
+                    $pluriel = $nbArticles>1 ? "s": "";
+                    $h3 = "Il y a $nbArticles article$pluriel";
+                endif;
+                ?>
+                        <h3 class="h3 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0"><?=$h3?></h3>
+                <?php
+                foreach($articles as $article):
+                ?>
                 <article>
-                    <h3>Titre 1</h3>
+                    <h4><a href="?articleSlug=<?=$article['slug']?>"><?=$article['title']?></a></h4>
+                    <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Ecrit par <a href="?userLogin=<?=$article['login']?>"><?=$article['username']?></a> le <?=$article['articledatepublished']?></span>
+                    <?php var_dump($articles) ?>
                 </article>
+                <?php
+                endforeach;
+                ?>
                     </div>
 
 
