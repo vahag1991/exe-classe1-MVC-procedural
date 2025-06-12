@@ -58,7 +58,7 @@ Cette partie sera accessible aux utilisateurs non enregistrés et non connectés
 
 #### Pages publiques
 
-- `Accueil` (qui affichera) : Les articles (voir la table `article`) affichés par ordre de publication `articledatepublished` descendant SI `articlepublished` => 1 (0 si non publié), avec le `username` venant de la table `user` lié. Il faut afficher le nombre de messages:
+- `Accueil` (qui affichera) : Les articles (voir la table `article`) affichés par ordre de publication `articledatepublished` descendant SI `articlepublished` => 1 (0 si non publié), avec le `username` venant de la table `user` lié. Il faut afficher le nombre de messages :
 Pas encore de message / Il y a 1 message / Il y a 2 messages | comme dans l'exemple.
 - Une page `À propos` qui contiendra un texte static.
 - Une page `Connexion` qui contiendra un formulaire permettant de se connecter à l'administration. Il faudra utiliser `password_verify()` pour vérifier le mot de passe. Elle ne sera pas accessible si nous sommes déjà connecté !
