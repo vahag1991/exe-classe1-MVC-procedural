@@ -29,7 +29,7 @@
                 <a class="nav-link" href="./">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?page=about">About</a>
+                <a class="nav-link" href="?page=about">A propos</a>
             </li>
             <?php if (isset($_SESSION['login'])): ?>
                 <li class="nav-item">

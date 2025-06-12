@@ -1,7 +1,8 @@
 <?php
 # controller/PublicController.php
 require_once "../model/UserModel.php";
-require_once "../view/homepage.html.php";
+require_once "../model/ArticleModel.php";
+
 
 if (isset($_GET['page']) && $_GET['page'] === 'conn') {
 
@@ -47,6 +48,10 @@ if (isset($_GET['page']) && $_GET['page'] === 'conn') {
             }
         }
     }
+} elseif (isset($_GET['page']) && $_GET['page'] === 'about') {
+    require_once "../view/aboutPage.html.php";
+} else {
+
+    $articlesOrderByPublishedDesc = getArticleOrderByPublishedDesc($pdo);
+    require_once "../view/homepage.html.php";
 }
-
-

@@ -48,7 +48,56 @@ function insertArticleUnique(PDO $pdo, string $title, string $articletext, int $
 }
 
 // En COURS
-// function getArticles(PDO $pdo, $slug, $title, $acticle){
-//     $sql = "SELECT  FROM article";
-//     $stmt = 
+function getArticles(PDO $pdo)
+{
+    $stmt = $pdo->prepare("SELECT title, articletext FROM article ORDER BY articledatecreated DESC");
+    $stmt->execute();
+    $articles = $stmt->fetchAll();
+    $stmt->closeCursor();
+
+    return $articles;
+}
+
+function getUnpublishedArticles(PDO $pdo)
+{
+    $stmt = $pdo->prepare("SELECT title, slug FROM article WHERE articlepublished = 0");
+    $stmt->execute();
+    $articles = $stmt->fetchAll();
+    $stmt->closeCursor();
+
+    return $articles;
+}
+
+// function getPublishedArticle(PDO $pdo): array
+// {
+//     $stmt = $pdo->prepare("SELECT a.`title`, a.`slug`, SUBSTR(a.`articletext`,1,250) AS articletext, a.`articledatepublished`, u.`login`, u.`username` 
+// FROM `article` a 
+// JOIN `user` u ON u.`iduser` = a.`user_iduser` 
+// WHERE a.`articlepublished` = 1
+//   ");
+//     $stmt->execute();
+//     $articles = $stmt->fetchAll();
+//     $stmt->closeCursor();
+
+//     return $articles;
 // }
+
+function getArticleOrderByPublishedDesc(PDO $pdo): array
+{
+    $sql = "SELECT a.`title`, a.`articletext`, a.`articledatepublished`, u.`username`
+            FROM `article` a
+            JOIN `user` u ON a.`user_iduser` = u.`iduser`
+            WHERE a.`articlepublished` = 1
+            ORDER BY a.`articledatepublished` DESC";
+
+    try {
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $articles = $query->fetchAll();
+        $query->closeCursor();
+        return $articles;
+
+    } catch (Exception $e) {
+        die('Erreur lors de la récupération des articles : ' . $e->getMessage());
+    }
+}
