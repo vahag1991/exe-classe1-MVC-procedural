@@ -21,7 +21,7 @@ function insertArticleUnique(PDO $pdo, string $title, string $articletext, int $
     while (true) {
         $checkStmt->execute([$slug]);
         if ($checkStmt->fetchColumn() == 0) {
-            break;
+            break;  
         }
         $slug = $baseSlug . '-' . $i;
         $i++;
@@ -68,23 +68,9 @@ function getUnpublishedArticles(PDO $pdo)
     return $articles;
 }
 
-// function getPublishedArticle(PDO $pdo): array
-// {
-//     $stmt = $pdo->prepare("SELECT a.`title`, a.`slug`, SUBSTR(a.`articletext`,1,250) AS articletext, a.`articledatepublished`, u.`login`, u.`username` 
-// FROM `article` a 
-// JOIN `user` u ON u.`iduser` = a.`user_iduser` 
-// WHERE a.`articlepublished` = 1
-//   ");
-//     $stmt->execute();
-//     $articles = $stmt->fetchAll();
-//     $stmt->closeCursor();
-
-//     return $articles;
-// }
-
 function getArticleOrderByPublishedDesc(PDO $pdo): array
 {
-    $sql = "SELECT a.`title`, a.`articletext`, a.`articledatepublished`, u.`username`
+    $sql = "SELECT a.`title`, a.`slug`, SUBSTR(a.`articletext`, 1, 250) AS articletext, a.`articledatepublished`, u.`username`
             FROM `article` a
             JOIN `user` u ON a.`user_iduser` = u.`iduser`
             WHERE a.`articlepublished` = 1
@@ -96,7 +82,6 @@ function getArticleOrderByPublishedDesc(PDO $pdo): array
         $articles = $query->fetchAll();
         $query->closeCursor();
         return $articles;
-
     } catch (Exception $e) {
         die('Erreur lors de la récupération des articles : ' . $e->getMessage());
     }

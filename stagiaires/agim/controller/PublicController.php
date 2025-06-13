@@ -54,4 +54,5 @@ if (isset($_GET['page']) && $_GET['page'] === 'conn') {
 
     $articlesOrderByPublishedDesc = getArticleOrderByPublishedDesc($pdo);
     require_once "../view/homepage.html.php";
+
 }

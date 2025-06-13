@@ -32,17 +32,17 @@
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($article['title']) ?></h5>
-
                         <p class="card-text">
-                            <?= nl2br(htmlspecialchars(substr($article['articletext'], 0, 300))) ?>...
+                            <?= nl2br(htmlspecialchars(substr($article['articletext'], 0, 250))) ?>
+                            <a href="<?= htmlspecialchars($article['slug']) ?>">... Lire l'article</a>
                         </p>
-
                         <div class="d-flex justify-content-between text-muted mt-3">
                             <small>Publié le <?= date('d/m/Y à H:i', strtotime($article['articledatepublished'])) ?></small>
                             <small>Auteur : <?= htmlspecialchars($article['username']) ?></small>
                         </div>
                     </div>
                 </div>
+
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
