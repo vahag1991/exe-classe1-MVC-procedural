@@ -9,7 +9,7 @@ License: https://freebootstrap.net/license
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercice MVC 2025 | Accueil</title>
+    <title>Exercice MVC 2025 | A propos de nous</title>
 
     <!-- ======= Google Font =======-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,8 +90,8 @@ License: https://freebootstrap.net/license
 
 
                     <ul class="navbar-nav nav me-auto ps-lg-5 mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link scroll-link active" aria-current="page" href="./">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link scroll-link" href="./?pg=about">À propos</a></li>
+                        <li class="nav-item"><a class="nav-link scroll-link" aria-current="page" href="./">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link scroll-link active" href="./?pg=about">À propos</a></li>
                         <li class="nav-item"><a class="nav-link scroll-link" href="./?pg=login">Connexion</a></li>
 
 
@@ -134,7 +134,8 @@ License: https://freebootstrap.net/license
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="row">
                             <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0">webdev la classe one</span>
-                                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Accueil</h1>
+                                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">A propos</h1>
+                                <p class="hero-description mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="200">Le Groupe 1 est une équipe dynamique et passionnée de développeurs web hautement qualifiés, spécialisés dans la création de solutions numériques performantes, innovantes et adaptées aux besoins de nos clients.<br><br> Notre engagement envers la qualité, la collaboration et les technologies de pointe fait de nous un partenaire de choix pour vos projets web.</p>
                                 <p class="hero-description mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="200">Le Groupe 1 est une équipe dynamique et passionnée de développeurs web hautement qualifiés, spécialisés dans la création de solutions numériques performantes, innovantes et adaptées aux besoins de nos clients.<br><br> Notre engagement envers la qualité, la collaboration et les technologies de pointe fait de nous un partenaire de choix pour vos projets web.</p>
                                 <div class="logos mb-4" data-aos="fade-up" data-aos-delay="400"><span class="logos-title text-uppercase mb-4 d-block">Nos soutiens</span>
                                     <div class="logos-images d-flex gap-4 align-items-center"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-air-bnb__black.svg" alt="Company 1" style="width: 110px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-ibm__black.svg" alt="Company 2" style="width: 80px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-google__black.svg" alt="Company 3" style="width: 110px;"></div>
@@ -156,31 +157,10 @@ License: https://freebootstrap.net/license
         <!-- ======= FAQ =======-->
         <section class="section faq__v2" id="faq">
             <div class="container">
-                <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Nos derniers articles</span>
-                <?php
-                // on compte le nombre d'articles
-                $nbArticles = count($articles);
-                // si pas d'articles
-                if(empty($nbArticles)):
-                    $h3 = "Pas encore d'article";
-                else:
-                    // si on plus d'un article
-                    $pluriel = $nbArticles>1 ? "s": "";
-                    $h3 = "Il y a $nbArticles article$pluriel";
-                endif;
-                ?>
-                        <h3 class="h3 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0"><?=$h3?></h3>
-                <?php
-                foreach($articles as $article):
-                ?>
-                <article>
-                    <h4><a href="?articleSlug=<?=$article['slug']?>"><?=$article['title']?></a></h4>
-                    <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Ecrit par <a href="?userLogin=<?=$article['login']?>"><?=$article['username']?></a> le <?=$article['articledatepublished']?></span>
-                    <p><?=$article['articletext']?> ... <a href="?articleSlug=<?=$article['slug']?>">Lire la suite</a></p>
-                </article>
-                <?php
-                endforeach;
-                ?>
+                <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Nous sommes les meilleurs !</span>
+
+                        <h3 class="h3 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0">Merci de nous faire confiance !</h3>
+
                     </div>
 
 
