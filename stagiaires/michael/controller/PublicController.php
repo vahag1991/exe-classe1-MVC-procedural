@@ -19,6 +19,6 @@ if(!isset($_GET['pg'])) {
     if($_GET['pg']==='about'){
         require_once "../view/about.html.php";
     }elseif($_GET['pg']==='login'){
-
+        require_once "../view/login.html.php";
     }
 }
