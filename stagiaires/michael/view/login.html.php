@@ -151,8 +151,8 @@ License: https://freebootstrap.net/license
 
                                                 <button class="btn btn-primary fw-semibold" type="submit">Connexion</button>
                                             </form>
-                                            <div class="mt-3 d-none alert alert-success" id="successMessage">Message sent successfully!</div>
-                                            <div class="mt-3 d-none alert alert-danger" id="errorMessage">Message sending failed. Please try again later.</div>
+                                            <div class="mt-3 d-none alert alert-success" id="successMessage">Merci de vous être connecté !</div>
+                                            <div class="mt-3 d-none alert alert-danger" id="errorMessage">Login et/ou mot de passe incorrecte !</div>
 
                                 </div>
                             </div>
