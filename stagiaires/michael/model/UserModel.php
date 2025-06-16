@@ -33,3 +33,24 @@ function authentificateActivedUser(PDO $connect, string $user, string $pwd):bool
     }
 
 }
+
+// fonction pour déconnecter l'utilisateur
+function disconnectActivedUser():void
+{
+    // bonne pratique, suppression des variables de session
+    // méthode tableau : $_SESSION = [];
+    session_unset();
+
+    // Si vous voulez détruire complètement la session, effacez également
+    // le cookie de session.
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+
+    // Finalement, on détruit la session côté serveur.
+    session_destroy();
+}

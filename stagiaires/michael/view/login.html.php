@@ -91,8 +91,8 @@ License: https://freebootstrap.net/license
 
                     <ul class="navbar-nav nav me-auto ps-lg-5 mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link scroll-link" aria-current="page" href="./">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link scroll-link active" href="./?pg=about">À propos</a></li>
-                        <li class="nav-item"><a class="nav-link scroll-link" href="./?pg=login">Connexion</a></li>
+                        <li class="nav-item"><a class="nav-link scroll-link" href="./?pg=about">À propos</a></li>
+                        <li class="nav-item"><a class="nav-link scroll-link active" href="./?pg=login">Connexion</a></li>
 
 
                     </ul>
