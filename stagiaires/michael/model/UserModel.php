@@ -22,6 +22,8 @@ function authentificateActivedUser(PDO $connect, string $user, string $pwd):bool
         if(password_verify($userpwd,$utilisateur['userpwd'])){
             // création de la session active
             $_SESSION = $utilisateur;
+            // suppression du mot de passe
+            unset($_SESSION['userpwd']);
             return true;
         }else{
             return false;
