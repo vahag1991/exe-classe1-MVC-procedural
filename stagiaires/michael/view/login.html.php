@@ -137,7 +137,7 @@ License: https://freebootstrap.net/license
                                 <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Connexion</h1>
                                 <div class="hero-description mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="200">
 
-                                            <form id="contactForm" method="post">
+                                            <form class="<?=$displayForm?>" id="contactForm" method="post">
                                                 <div class="row gap-3 mb-3">
                                                     <div class="col-md-12">
                                                         <label class="mb-2" for="name">Votre Login</label>
@@ -151,8 +151,12 @@ License: https://freebootstrap.net/license
 
                                                 <button class="btn btn-primary fw-semibold" type="submit">Connexion</button>
                                             </form>
-                                            <div class="mt-3 d-none alert alert-success" id="successMessage">Merci de vous être connecté !</div>
-                                            <div class="mt-3 d-none alert alert-danger" id="errorMessage">Login et/ou mot de passe incorrecte !</div>
+                                            <div class="mt-3 <?=$displaySucces?>  alert alert-success" id="successMessage">Merci de vous être connecté !</div>
+                                            <div class="mt-3 <?=$displayError?> alert alert-danger" id="errorMessage">Login et/ou mot de passe incorrecte !</div>
+                                    <?php
+                                    // si c'est un succès, on crée la rediraction en js
+                                    if(isset($jsRedirect)) echo $jsRedirect;
+                                    ?>
 
                                 </div>
                             </div>
