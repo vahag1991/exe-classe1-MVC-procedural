@@ -70,11 +70,11 @@ function getUnpublishedArticles(PDO $pdo)
 
 function getArticleOrderByPublishedDesc(PDO $pdo): array
 {
-    $sql = "SELECT a.`title`, a.`slug`, SUBSTR(a.`articletext`, 1, 250) AS articletext, a.`articledatepublished`, u.`username`
-            FROM `article` a
-            JOIN `user` u ON a.`user_iduser` = u.`iduser`
-            WHERE a.`articlepublished` = 1
-            ORDER BY a.`articledatepublished` DESC";
+    $sql = "SELECT a.title, a.slug, a.articletext, a.articledatepublished, u.username
+            FROM article a
+            JOIN user u ON a.user_iduser = u.iduser
+            WHERE a.articlepublished = 1
+            ORDER BY a.articledatepublished DESC";
 
     try {
         $query = $pdo->prepare($sql);
@@ -84,5 +84,24 @@ function getArticleOrderByPublishedDesc(PDO $pdo): array
         return $articles;
     } catch (Exception $e) {
         die('Erreur lors de la récupération des articles : ' . $e->getMessage());
+    }
+}
+
+function getArticleBySlug(PDO $pdo, string $slug): ?array
+{
+    $sql = "SELECT a.title, a.slug, a.articletext, a.articledatepublished, u.username
+            FROM article a
+            JOIN user u ON a.user_iduser = u.iduser
+            WHERE a.slug = :slug AND a.articlepublished = 1
+            LIMIT 1";
+
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['slug' => $slug]);
+        $article = $stmt->fetch();
+        $stmt->closeCursor();
+        return $article ?: null;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
     }
 }

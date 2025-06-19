@@ -36,7 +36,14 @@ if (isset($_GET['page']) && $_GET['page'] === 'deconn') {
 } elseif (isset($_GET['page']) && $_GET['page'] === 'about') {
 
     require_once('../view/aboutPage.html.php');
+} elseif (isset($_GET['page'])) {
+    $slug = $_GET['page'];
+    $selectedSlug = $slug; // on passe cette variable à la vue
 
+    // On récupère TOUS les articles, même si un seul est concerné
+    $articlesOrderByPublishedDesc = getArticleOrderByPublishedDesc($pdo);
+
+    require_once "../view/homepage.html.php";
 } else {
     $articlesOrderByPublishedDesc = getArticleOrderByPublishedDesc($pdo);
     require_once "../view/homepage.html.php";
