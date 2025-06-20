@@ -9,10 +9,10 @@ require_once "../model/UserModel.php";
 
 // non existence de pg
 if(!isset($_GET['pg'])) {
-// chargement des articles
+    // chargement des articles
     $articles = selectAllPlublishedArticle($db);
 
-// chargement du template de l'accueil
+    // chargement du template de l'accueil
     require_once "../view/homepage.html.php";
 // existence de pg
 }else {
@@ -27,5 +27,12 @@ if(!isset($_GET['pg'])) {
             header("Location: ./");
             exit();
         }
+    // on a cliqué sur admin
+    }elseif ($_GET['pg'] === "admin"){
+        // chargement des tous les articles
+        $articles = selectAllArticle($db);
+
+        // chargement du template de l'accueil de l'administration
+        require_once "../view/admin.homepage.html.php";
     }
 }
