@@ -163,17 +163,38 @@ License: https://freebootstrap.net/license
                 endif;
                 ?>
                         <h3 class="h3 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0"><?=$h3?></h3>
-                <?php
-                foreach($articles as $article):
-                ?>
-                <article>
-                    <h4><a href="?articleSlug=<?=$article['slug']?>"><?=$article['title']?></a></h4>
-                    <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Ecrit par <?=$article['login']?>" le <?=$article['articledatepublished']?></span>
-                    <p><?=$article['articletext']?> ... <a href="?articleSlug=<?=$article['slug']?>">Lire la suite</a></p>
-                </article>
-                <?php
-                endforeach;
-                ?>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">idarticle</th>
+                        <th scope="col">title</th>
+                        <th scope="col">articletext</th>
+                        <th scope="col">articlepublished</th>
+                        <th scope="col">articledatepublished</th>
+                        <th scope="col">login</th>
+                        <th scope="col">Modifier</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach($articles as $article):
+                        ?>
+                    <tr>
+                        <td><?=$article['idarticle']?></td>
+                        <td><?=$article['title']?></td>
+                        <td><?=$article['articletext']?></td>
+                        <td><?= $article['articlepublished']===1?'✅':'❌' ?></td>
+                        <td><?= $article['articledatepublished']===null?"Pas de date":substr($article['articledatepublished'],0,10)?></td>
+                        <td><?=$article['login']?></td>
+                        <td><span class="bg-success p-2 rounded">Modifier</span></td>
+                        <td><span class="bg-danger p-2 rounded">Supprimer</span></td>
+                    </tr>
+                        <?php
+                    endforeach;
+                        ?>
+                    </tbody>
+                </table>
                     </div>
 
 
@@ -204,7 +225,7 @@ License: https://freebootstrap.net/license
         <!-- End Footer-->
 
     </main>
-</div>
+
 
 <!-- ======= Back to Top =======-->
 <button id="back-to-top"><i class="bi bi-arrow-up-short"></i></button>

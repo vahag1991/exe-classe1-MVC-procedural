@@ -36,7 +36,7 @@ function selectAllPlublishedArticle(PDO $connexion):array
 function selectAllArticle(PDO $connexion):array
 {
     $sql="
-    SELECT a.`idarticle`, a.`title`, a.`slug`, SUBSTR(a.`articletext`,1,100) AS articletext, a.`articlepublished`, a.`articledatepublished`,
+    SELECT a.`idarticle`, a.`title`, SUBSTR(a.`articletext`,1,80) AS articletext, a.`articlepublished`, a.`articledatepublished`,
            u.`login`
     FROM `article` a 
     LEFT JOIN `user` u 
