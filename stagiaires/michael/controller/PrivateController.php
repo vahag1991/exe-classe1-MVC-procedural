@@ -34,5 +34,26 @@ if(!isset($_GET['pg'])) {
 
         // chargement du template de l'accueil de l'administration
         require_once "../view/admin.homepage.html.php";
+    // suppression d'un article (ctype_digit vérifie qu'un string ne contient que
+        // du numérique [0-9]
+    }elseif ($_GET['pg'] === "delete" && isset($_GET['idarticle']) && ctype_digit($_GET['idarticle'])){
+        $idarticle = (int) $_GET['idarticle'];
+        // suppresion de l'article dont l'id vaut $idarticle
+        if(deleteArticle($db,$idarticle)){
+            header("Location: ./?pg=admin");
+            exit();
+        }
+
+    // on veut modifier l'article
+    }elseif ($_GET['pg'] === "update" && isset($_GET['idarticle']) && ctype_digit($_GET['idarticle'])){
+        echo $idarticle = (int) $_GET['idarticle'];
+        // A FAIRE
+
+    // on veut créer un nouvel article
+    }elseif ($_GET['pg'] === "new"){
+
+        require_once "../view/admin.insert.html.php";
+        // A FAIRE
+
     }
 }

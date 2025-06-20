@@ -9,7 +9,7 @@ License: https://freebootstrap.net/license
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercice MVC 2025 | Accueil de l'administration</title>
+    <title>Exercice MVC 2025 | Créer un nouvel article</title>
 
     <!-- ======= Google Font =======-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,8 +133,8 @@ License: https://freebootstrap.net/license
                     <div class="col-lg-12 mb-2 mb-lg-0">
                         <div class="row">
                             <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0">webdev la classe one</span>
-                                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Accueil de l'administration</h1>
-                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=new">Ajouter un nouvel article</a></h4>
+                                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Ajouter un nouvel article</h1>
+                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=admin">Retour à l'administration</a></h4>
                             </div>
                             </div>
                         </div>
@@ -149,52 +149,18 @@ License: https://freebootstrap.net/license
         <!-- ======= FAQ =======-->
         <section class="section faq__v2" id="faq">
             <div class="container">
-                <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Nos derniers articles</span>
-                <?php
-                // on compte le nombre d'articles
-                $nbArticles = count($articles);
-                // si pas d'articles
-                if(empty($nbArticles)):
-                    $h3 = "Pas encore d'article";
-                else:
-                    // si on plus d'un article
-                    $pluriel = $nbArticles>1 ? "s": "";
-                    $h3 = "Il y a $nbArticles article$pluriel";
-                endif;
-                ?>
-                        <h3 class="h3 fw-bold mb-3" data-aos="fade-up" data-aos-delay="0"><?=$h3?></h3>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">idarticle</th>
-                        <th scope="col">title</th>
-                        <th scope="col">articletext</th>
-                        <th scope="col">articlepublished</th>
-                        <th scope="col">articledatepublished</th>
-                        <th scope="col">login</th>
-                        <th scope="col">Modifier</th>
-                        <th scope="col">Supprimer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach($articles as $article):
-                        ?>
-                    <tr>
-                        <td><?=$article['idarticle']?></td>
-                        <td><?=$article['title']?></td>
-                        <td><?=$article['articletext']?></td>
-                        <td><?= $article['articlepublished']===1?'✅':'❌' ?></td>
-                        <td><?= $article['articledatepublished']===null?"Pas de date":substr($article['articledatepublished'],0,10)?></td>
-                        <td><?=$article['login']?></td>
-                        <td><a class="text-decoration-none" href="?pg=update&idarticle=<?=$article['idarticle']?>"><p class="bg-success p-2 rounded ">Modifier</p></a></td>
-                        <td><p onclick="confirm('Voulez-vous vraiment supprimer l\'article : \n <?=addslashes($article['title']); // pour mettre des slashs devant les "'" ?>')? window.location.href='./?pg=delete&idarticle=<?=$article['idarticle']?>' :'';" class="bg-danger p-2 rounded">Supprimer</p></td>
-                    </tr>
-                        <?php
-                    endforeach;
-                        ?>
-                    </tbody>
-                </table>
+                <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Formulaire</span>
+                <form action="" method="post" name="insertion">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <input type="submit" value="envoyer">
+                </form>
                     </div>
 
 

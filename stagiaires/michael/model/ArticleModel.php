@@ -58,3 +58,17 @@ function selectAllArticle(PDO $connexion):array
         die($e->getMessage());
     }
 }
+
+function deleteArticle(PDO $connexion, int $id): bool
+{
+    // requête préparée
+    $sql = "DELETE FROM `article` WHERE `idarticle`=?";
+    $prepare = $connexion->prepare($sql);
+    try{
+        $prepare->execute([$id]);
+        $prepare->closeCursor();
+        return true;
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+}

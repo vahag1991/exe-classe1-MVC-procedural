@@ -21,7 +21,7 @@ if(isset($_GET['pg'])){
     // si connecté
     if(isset($_SESSION['login'])):
     ?>
-        <li class="nav-item <?=$activeAdmin?>"><a class="nav-link scroll-link" href="./?pg=admin">Administration</a></li>
+        <li class="nav-item"><a class="nav-link scroll-link  <?=$activeAdmin?>" href="./?pg=admin">Administration</a></li>
         <li class="nav-item"><a class="nav-link scroll-link" href="./?pg=disconnect">Déconnexion de <?=$_SESSION['username']?></a></li>
     <?php
     // pas connecté
