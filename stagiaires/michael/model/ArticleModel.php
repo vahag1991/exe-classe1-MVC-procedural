@@ -72,3 +72,52 @@ function deleteArticle(PDO $connexion, int $id): bool
         die($e->getMessage());
     }
 }
+
+/**
+ * Génère un slug à partir d'une chaîne de caractères en utilisant Transliterator.
+ *
+ * Cette fonction utilise l'extension PHP intl (Transliterator) pour une gestion
+ * avancée de la translittération des caractères Unicode en équivalents ASCII,
+ * rendant la "slugification" plus robuste pour diverses langues.
+ *
+ * @param string $text La chaîne de caractères à "slugifier".
+ * @return string Le slug généré.
+ * @throws RuntimeException Si l'extension intl n'est pas chargée.
+ * @throws \Random\RandomException
+ */
+function sluggifyTitle(string $text): string
+{
+
+    // 1. Convertir la chaîne en UTF-8 pour s'assurer d'une bonne gestion par Transliterator
+    //    (bien que Transliterator gère généralement les encodages, c'est une bonne pratique).
+    $text = mb_convert_encoding($text, 'UTF-8', mb_detect_encoding($text) ?: 'UTF-8');
+
+    // 2. Créer un translittérateur.
+    //    ':: Any-Latin;' : Convertit n'importe quel script en son équivalent latin.
+    //    ':: Latin-ASCII;' : Convertit le script latin en ASCII, gérant les accents.
+    //    ':: Lower();' : Convertit en minuscules. C'est plus propre de le faire ici.
+    //    ':: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;' : Normalisation pour gérer certains cas complexes
+    //                                                     (par ex. lettres avec accents décomposés).
+    $transliterator = Transliterator::createFromRules(
+        ':: Any-Latin; :: Latin-ASCII; :: Lower(); :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;'
+    );
+
+    $slug = $transliterator->transliterate($text);
+
+    // 3. Supprimer tous les caractères qui ne sont pas des lettres, des chiffres ou des tirets/espaces.
+    //    À ce stade, Transliterator a déjà fait l'essentiel du travail des accents et minuscules.
+    //    On utilise `preg_replace` pour nettoyer les symboles restants et les caractères non alphanumériques.
+    //    Notez que \p{L} et \p{N} fonctionnent toujours avec le flag 'u' pour l'Unicode.
+    $slug = preg_replace('/[^\p{L}\p{N}\s-]/u', '', $slug);
+
+    // 4. Remplacer les multiples espaces et/ou tirets par un seul tiret.
+    $slug = preg_replace('/[\s-]+/', '-', $slug);
+
+    // 5. Supprimer les tirets en début et fin de chaîne.
+    $slug = trim($slug, '-');
+
+    // 6. Création d'un préfix de 4 caractères pour rendre le slug unique
+    //  et retour
+    return bin2hex(random_bytes(2)) . "-" . $slug;
+
+}
