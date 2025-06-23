@@ -175,7 +175,7 @@ License: https://freebootstrap.net/license
                 <article>
                     <h4><a href="?articleSlug=<?=$article['slug']?>"><?=$article['title']?></a></h4>
                     <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Ecrit par <a href="?userLogin=<?=$article['login']?>"><?=$article['username']?></a> le <?=$article['articledatepublished']?></span>
-                    <p><?=$article['articletext']?> ... <a href="?articleSlug=<?=$article['slug']?>">Lire la suite</a></p>
+                    <p><?=cutTheText($article['articletext'])?> <a href="?articleSlug=<?=$article['slug']?>">Lire la suite</a></p>
                 </article>
                 <?php
                 endforeach;

@@ -52,8 +52,15 @@ if(!isset($_GET['pg'])) {
     // on veut créer un nouvel article
     }elseif ($_GET['pg'] === "new"){
 
+        // si on a envoyé le formulaire pour insérer un article
+        if(isset($_POST['title'],$_POST['articletext'])){
+            // id de l'utilisateur connexté
+            $myId = $_SESSION['iduser'];
+            $insert = insertArticle($db,$_POST);
+
+        }
+
         require_once "../view/admin.insert.html.php";
-        // A FAIRE
 
     }
 }

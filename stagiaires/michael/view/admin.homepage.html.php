@@ -183,7 +183,7 @@ License: https://freebootstrap.net/license
                     <tr>
                         <td><?=$article['idarticle']?></td>
                         <td><?=$article['title']?></td>
-                        <td><?=$article['articletext']?></td>
+                        <td><?=cutTheText($article['articletext'])?></td>
                         <td><?= $article['articlepublished']===1?'✅':'❌' ?></td>
                         <td><?= $article['articledatepublished']===null?"Pas de date":substr($article['articledatepublished'],0,10)?></td>
                         <td><?=$article['login']?></td>

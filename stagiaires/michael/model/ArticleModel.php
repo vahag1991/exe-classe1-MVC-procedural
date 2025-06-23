@@ -84,6 +84,14 @@ function deleteArticle(PDO $connexion, int $id): bool
     }
 }
 
+function insertArticle(PDO $con, array $datas):bool
+{
+    // id de l'utilisateur connexté
+    echo $myId = $_SESSION['iduser'];
+    
+    return true;
+}
+
 /**
  * Génère un slug à partir d'une chaîne de caractères en utilisant Transliterator.
  *
@@ -128,7 +136,7 @@ function sluggifyTitle(string $text): string
     $slug = trim($slug, '-');
 
     // 6. Création d'un préfix de 4 caractères pour rendre le slug unique
-    //  et retour
+    //  et retour en hexadécimal * 2
     return bin2hex(random_bytes(2)) . "-" . $slug;
 
 }
