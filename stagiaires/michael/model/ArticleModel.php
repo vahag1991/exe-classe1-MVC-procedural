@@ -86,10 +86,60 @@ function deleteArticle(PDO $connexion, int $id): bool
 
 function insertArticle(PDO $con, array $datas):bool
 {
-    // id de l'utilisateur connexté
-    echo $myId = $_SESSION['iduser'];
-    
-    return true;
+    // id de l'utilisateur connecté
+    // variable globale de type session
+    $myId = $_SESSION['iduser'];
+
+    // On va traiter nos variables post avant une éventuelle insertion
+    $title = trim(strip_tags($datas['title']));
+
+    // création du slug depuis le title
+    $slug = sluggifyTitle($title);
+
+    // on peut encoder le titre
+    $title = htmlspecialchars($title,ENT_QUOTES);
+
+    if(
+        empty($title) ||
+        empty($slug) ||
+        strlen($title) > 160 ||
+        strlen($slug) > 165) return false;
+
+    // on va encoder le text
+    $text = htmlspecialchars(trim(strip_tags($datas['articletext'])),ENT_QUOTES);
+
+    // si vide
+    if(empty($text)) return false;
+
+    // on vérifie si publié
+    if(isset($datas['articlepublished'])){
+        $isPublished = 1;
+        $datePublished = $datas['articledatepublished']==="" ? date("Y-m-d H:i:s"): $datas['articledatepublished'];
+    }else{
+        $isPublished = 0;
+        $datePublished = null;
+    }
+
+    $sql = "INSERT INTO `article` (`title`,
+                       `slug`,
+                       `articletext`,
+                       `articlepublished`,
+                       `articledatepublished`, `user_iduser`) VALUES (?,?,?,?,?,?)";
+
+    $prepare = $con->prepare($sql);
+
+    try{
+
+        $prepare->execute([
+            $title, $slug, $text, $isPublished, $datePublished, $myId
+        ]);
+        return true;
+
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+
+
 }
 
 /**
