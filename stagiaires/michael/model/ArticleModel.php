@@ -33,6 +33,11 @@ function selectAllPlublishedArticle(PDO $connexion):array
     }
 }
 
+/**
+ * Sélection pour l'administration
+ * @param PDO $connexion
+ * @return array
+ */
 function selectAllArticle(PDO $connexion):array
 {
     $sql="
@@ -59,6 +64,12 @@ function selectAllArticle(PDO $connexion):array
     }
 }
 
+/**
+ * Supprime un article
+ * @param PDO $connexion
+ * @param int $id
+ * @return bool
+ */
 function deleteArticle(PDO $connexion, int $id): bool
 {
     // requête préparée
@@ -120,4 +131,19 @@ function sluggifyTitle(string $text): string
     //  et retour
     return bin2hex(random_bytes(2)) . "-" . $slug;
 
+}
+
+/**
+ * Evite de couper un texte au milieu
+ * d'un mot
+ * @param string $text
+ * @return string
+ *
+ */
+function cutTheText(string $text): string
+{
+    // on récupère la position du dernier espace dans le texte
+    $lastSpace = strripos($text," ");
+    // on coupe le texte de 0 à la position de l'espace vide
+    return substr($text,0,$lastSpace)."...";
 }
