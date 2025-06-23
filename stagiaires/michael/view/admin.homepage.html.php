@@ -134,7 +134,7 @@ License: https://freebootstrap.net/license
                         <div class="row">
                             <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0">webdev la classe one</span>
                                 <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Accueil de l'administration</h1>
-                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=new">Ajouter un nouvel article</a></h4>
+                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=new">Ajouter un nouvel article</a> C(R)UD</h4>
                             </div>
                             </div>
                         </div>

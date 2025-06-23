@@ -134,7 +134,7 @@ License: https://freebootstrap.net/license
                         <div class="row">
                             <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0">webdev la classe one</span>
                                 <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">Ajouter un nouvel article</h1>
-                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=admin">Retour à l'administration</a></h4>
+                                <h4 class="mb-3" data-aos="fade-up" data-aos-delay="100"><a href="./?pg=admin">Retour à l'administration</a> (C)RUD</h4>
                             </div>
                             </div>
                         </div>
@@ -152,12 +152,22 @@ License: https://freebootstrap.net/license
                 <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Formulaire</span>
                 <form action="" method="post" name="insertion">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        <label for="exampleFormControlInput1" class="form-label">Votre titre</label>
+                        <input type="text" name="title"  class="form-control" id="exampleFormControlInput1" placeholder="titre">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea name="articletext" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="articlepublished" type="checkbox" value="1" id="publish">
+                        <label class="form-check-label" for="checkDefault">
+                            Publié ?
+                        </label>
+                    </div>
+                    <div id="dateContainer" class="mb-3 d-none">
+                        <label class="form-label fw-semibold">Date et heure de publication :</label>
+                        <input type="datetime-local" name="articledatepublished" class="form-control">
                     </div>
                     <input type="submit" value="envoyer">
                 </form>
@@ -198,6 +208,13 @@ License: https://freebootstrap.net/license
 <!-- End Back to top-->
 
 <!-- ======= Javascripts =======-->
+<script>
+    // affichage du formulaire si on choisit publier.
+    document.getElementById('publish').addEventListener('change', function () {
+        const dateContainer = document.getElementById('dateContainer');
+        dateContainer.classList.toggle('d-none', !this.checked);
+    });
+</script>
 <script src="assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="assets/vendors/gsap/gsap.min.js"></script>
 <script src="assets/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
