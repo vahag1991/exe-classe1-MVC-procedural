@@ -64,6 +64,30 @@ function selectAllArticle(PDO $connexion): array
     }
 }
 
+function selectOneArticleById(PDO $connexion, int $idarticle): array|bool
+{
+    $sql = "SELECT a.`idarticle`, a.`title`, a.`slug`, a.`articletext`, a.`articlepublished`, a.`articledatepublished`,
+           u.iduser, u.`login`
+    FROM `article` a 
+    LEFT JOIN `user` u 
+        ON u.`iduser` = a.`user_iduser`
+        WHERE a.`idarticle`= ?";
+    $prepare = $connexion->prepare($sql);
+
+    try{
+        // on récupère 1 ou 0 article
+       $prepare->execute([$idarticle]);
+       if($prepare->rowCount()===0) return false;
+       // on a trouvé un article
+       $recup = $prepare->fetch();
+       $prepare->closeCursor();
+       return $recup;
+
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+}
+
 /**
  * Supprime un article
  * @param PDO $connexion

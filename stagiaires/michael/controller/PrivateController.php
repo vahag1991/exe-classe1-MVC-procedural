@@ -46,8 +46,15 @@ if (!isset($_GET['pg'])) {
 
         // on veut modifier l'article
     } elseif ($_GET['pg'] === "update" && isset($_GET['idarticle']) && ctype_digit($_GET['idarticle'])) {
-        echo $idarticle = (int)$_GET['idarticle'];
+        $idarticle = (int)$_GET['idarticle'];
         // A FAIRE
+        $displaySucces = "d-none";
+        $displayError = "d-none";
+        $displayForm = "";
+
+        $article = selectOneArticleById($db,$idarticle);
+
+        require_once "../view/admin.update.html.php";
 
         // on veut créer un nouvel article
     } elseif ($_GET['pg'] === "new") {
