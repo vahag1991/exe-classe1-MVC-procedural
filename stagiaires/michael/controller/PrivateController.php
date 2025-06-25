@@ -53,6 +53,9 @@ if (!isset($_GET['pg'])) {
         $displayForm = "";
 
         $article = selectOneArticleById($db,$idarticle);
+        $users = selectAllUser($db);
+
+        // var_dump($users);
 
         require_once "../view/admin.update.html.php";
 

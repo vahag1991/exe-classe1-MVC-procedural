@@ -170,9 +170,20 @@ License: https://freebootstrap.net/license
                         <textarea name="articletext" class="form-control" id="exampleFormControlText" rows="5"><?=$article['articletext']?></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControllis" class="form-label">Auteur</label>
-                        <textarea name="articletext" class="form-control" id="exampleFormControlText" rows="5"><?=$article['login']?></textarea>
-                        
+                        <label for="exampleFormControlText" class="form-label">Auteur (origine : <?=$article['login']?>)</label>
+                        <select name="user_iduser" class="form-select" aria-label="Default select example">
+                            <?php
+                            // tant qu'on a des utilisateurs
+                            foreach($users as $user):
+                                // on vérifie l'actuel
+                                $checked = $user['iduser'] == $article['iduser']? "selected" : "";
+                            ?>
+                            <option value="<?=$user['iduser']?>" <?=$checked?>><?=$user['login']?></option>
+                            <?php
+                            endforeach;
+                            ?>
+                        </select>
+
                     </div>
                     <div class="form-check">
                         <?php $check = ($article['articlepublished']===1)? "checked" : ""; ?>

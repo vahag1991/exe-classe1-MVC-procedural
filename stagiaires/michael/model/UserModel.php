@@ -34,6 +34,19 @@ function authentificateActivedUser(PDO $connect, string $user, string $pwd): boo
 
 }
 
+function selectAllUser(PDO $connection):array
+{
+    try{
+        $select = $connection->query("SELECT `iduser`, `login` FROM `user`");
+        $return = $select->fetchAll();
+        $select->closeCursor();
+        return $return;
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+
+}
+
 // fonction pour déconnecter l'utilisateur
 function disconnectActivedUser(): bool
 {
