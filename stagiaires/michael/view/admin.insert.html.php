@@ -149,14 +149,20 @@ License: https://freebootstrap.net/license
         <!-- ======= FAQ =======-->
         <section class="section faq__v2" id="faq">
             <div class="container">
+                <div class="mt-3 <?=$displaySucces?>  alert alert-success" id="successMessage">Merci pour votre article</div>
+                <div class="mt-3 <?=$displayError?> alert alert-danger" id="errorMessage">Article non valide !</div>
+                <?php
+                // si c'est un succès, on crée la redirection en js
+                if(isset($jsRedirect)) echo $jsRedirect;
+                ?>
                 <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Formulaire</span>
-                <form action="" method="post" name="insertion">
+                <form class="<?=$displayForm?>" action="" method="post" name="insertion">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Votre titre</label>
                         <input type="text" name="title"  class="form-control" id="exampleFormControlInput1" placeholder="titre">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <label for="exampleFormControlTextarea1" class="form-label">Notre article</label>
                         <textarea name="articletext" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                     <div class="form-check">

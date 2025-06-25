@@ -7,9 +7,9 @@
  * Sélection de tous articles publiés
  * classés par articledatepublished DESC
  */
-function selectAllPlublishedArticle(PDO $connexion):array
+function selectAllPlublishedArticle(PDO $connexion): array
 {
-    $sql="
+    $sql = "
     SELECT a.`title`, a.`slug`, SUBSTR(a.`articletext`,1,250) AS articletext, a.`articledatepublished`,
            u.`login`, u.`username`
     FROM `article` a 
@@ -19,7 +19,7 @@ function selectAllPlublishedArticle(PDO $connexion):array
     ORDER BY a.`articledatepublished` DESC
     ;
     ";
-    try{
+    try {
         // requête
         $query = $connexion->query($sql);
         // récupération des résultats (tableau indexé, si 0 => [])
@@ -28,7 +28,7 @@ function selectAllPlublishedArticle(PDO $connexion):array
         $query->closeCursor();
         // envoyer le résultat
         return $resultat;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
@@ -38,9 +38,9 @@ function selectAllPlublishedArticle(PDO $connexion):array
  * @param PDO $connexion
  * @return array
  */
-function selectAllArticle(PDO $connexion):array
+function selectAllArticle(PDO $connexion): array
 {
-    $sql="
+    $sql = "
     SELECT a.`idarticle`, a.`title`, SUBSTR(a.`articletext`,1,80) AS articletext, a.`articlepublished`, a.`articledatepublished`,
            u.`login`
     FROM `article` a 
@@ -50,7 +50,7 @@ function selectAllArticle(PDO $connexion):array
              a.`articledatepublished` DESC
     ;
     ";
-    try{
+    try {
         // requête
         $query = $connexion->query($sql);
         // récupération des résultats (tableau indexé, si 0 => [])
@@ -59,7 +59,7 @@ function selectAllArticle(PDO $connexion):array
         $query->closeCursor();
         // envoyer le résultat
         return $resultat;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
@@ -75,16 +75,16 @@ function deleteArticle(PDO $connexion, int $id): bool
     // requête préparée
     $sql = "DELETE FROM `article` WHERE `idarticle`=?";
     $prepare = $connexion->prepare($sql);
-    try{
+    try {
         $prepare->execute([$id]);
         $prepare->closeCursor();
         return true;
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
 
-function insertArticle(PDO $con, array $datas):bool
+function insertArticle(PDO $con, array $datas): bool
 {
     // id de l'utilisateur connecté
     // variable globale de type session
@@ -97,25 +97,25 @@ function insertArticle(PDO $con, array $datas):bool
     $slug = sluggifyTitle($title);
 
     // on peut encoder le titre
-    $title = htmlspecialchars($title,ENT_QUOTES);
+    $title = htmlspecialchars($title, ENT_QUOTES);
 
-    if(
+    if (
         empty($title) ||
         empty($slug) ||
         strlen($title) > 160 ||
         strlen($slug) > 165) return false;
 
     // on va encoder le text
-    $text = htmlspecialchars(trim(strip_tags($datas['articletext'])),ENT_QUOTES);
+    $text = htmlspecialchars(trim(strip_tags($datas['articletext'])), ENT_QUOTES);
 
     // si vide
-    if(empty($text)) return false;
+    if (empty($text)) return false;
 
     // on vérifie si publié
-    if(isset($datas['articlepublished'])){
+    if (isset($datas['articlepublished'])) {
         $isPublished = 1;
-        $datePublished = $datas['articledatepublished']==="" ? date("Y-m-d H:i:s"): $datas['articledatepublished'];
-    }else{
+        $datePublished = $datas['articledatepublished'] === "" ? date("Y-m-d H:i:s") : $datas['articledatepublished'];
+    } else {
         $isPublished = 0;
         $datePublished = null;
     }
@@ -128,14 +128,14 @@ function insertArticle(PDO $con, array $datas):bool
 
     $prepare = $con->prepare($sql);
 
-    try{
+    try {
 
         $prepare->execute([
             $title, $slug, $text, $isPublished, $datePublished, $myId
         ]);
         return true;
 
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 
@@ -201,7 +201,7 @@ function sluggifyTitle(string $text): string
 function cutTheText(string $text): string
 {
     // on récupère la position du dernier espace dans le texte
-    $lastSpace = strripos($text," ");
+    $lastSpace = strripos($text, " ");
     // on coupe le texte de 0 à la position de l'espace vide
-    return substr($text,0,$lastSpace)."...";
+    return substr($text, 0, $lastSpace) . "...";
 }

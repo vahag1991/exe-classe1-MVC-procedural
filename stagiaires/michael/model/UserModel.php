@@ -1,7 +1,7 @@
 <?php
 # model/UserModel.php
 
-function authentificateActivedUser(PDO $connect, string $user, string $pwd):bool
+function authentificateActivedUser(PDO $connect, string $user, string $pwd): bool
 {
     // protection des mauvais copié/collé trim()
     $login = trim($user);
@@ -11,31 +11,31 @@ function authentificateActivedUser(PDO $connect, string $user, string $pwd):bool
     $sql = "SELECT * FROM `user` WHERE login=? AND `active`=1";
     $stmt = $connect->prepare($sql);
 
-    try{
+    try {
         $stmt->execute([$login]);
-        if($stmt->rowCount()===0) return false;
+        if ($stmt->rowCount() === 0) return false;
         $utilisateur = $stmt->fetch();
         // bonne pratique
         $stmt->closeCursor();
         // vérification du mot de passe du formulaire
         // avec celui haché dans la DB
-        if(password_verify($userpwd,$utilisateur['userpwd'])){
+        if (password_verify($userpwd, $utilisateur['userpwd'])) {
             // création de la session active
             $_SESSION = $utilisateur;
             // suppression du mot de passe
             unset($_SESSION['userpwd']);
             return true;
-        }else{
+        } else {
             return false;
         }
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 
 }
 
 // fonction pour déconnecter l'utilisateur
-function disconnectActivedUser():bool
+function disconnectActivedUser(): bool
 {
     // bonne pratique, suppression des variables de session
     // méthode tableau : $_SESSION = [];
