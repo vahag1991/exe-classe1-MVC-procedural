@@ -1,6 +1,12 @@
 <?php
 # model/UserModel.php
 
+/**
+ * @param PDO $connect
+ * @param string $user
+ * @param string $pwd
+ * @return bool
+ */
 function authentificateActivedUser(PDO $connect, string $user, string $pwd): bool
 {
     // protection des mauvais copié/collé trim()
@@ -34,6 +40,11 @@ function authentificateActivedUser(PDO $connect, string $user, string $pwd): boo
 
 }
 
+/**
+ * Choisir tous les users pour l'update
+ * @param PDO $connection
+ * @return array
+ */
 function selectAllUser(PDO $connection):array
 {
     try{
@@ -48,6 +59,9 @@ function selectAllUser(PDO $connection):array
 }
 
 // fonction pour déconnecter l'utilisateur
+/**
+ * @return bool
+ */
 function disconnectActivedUser(): bool
 {
     // bonne pratique, suppression des variables de session

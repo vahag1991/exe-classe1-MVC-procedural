@@ -64,6 +64,12 @@ function selectAllArticle(PDO $connexion): array
     }
 }
 
+/**
+ * On récupère l'article pour l'update (avec son user de base))
+ * @param PDO $connexion
+ * @param int $idarticle
+ * @return array|bool
+ */
 function selectOneArticleById(PDO $connexion, int $idarticle): array|bool
 {
     $sql = "SELECT a.`idarticle`, a.`title`, a.`slug`, a.`articletext`, a.`articlepublished`, a.`articledatepublished`,
@@ -88,6 +94,69 @@ function selectOneArticleById(PDO $connexion, int $idarticle): array|bool
     }
 }
 
+function updateArticleById(PDO $connection, array $datas, int $idarticle){
+    // on vérifie que la personne n'essaye pas d'accéder à un autre article
+    if($datas['idarticle']!=$idarticle) die("Attaque !");
+    // préparation de la requête
+    $sql = "UPDATE `article` SET `title`= :title,
+                       `slug`= :slug,
+                       `articletext`= :text,
+                       `articlepublished` = :published,
+                       `articledatepublished` = :date,
+                        `user_iduser` = :userid
+                       WHERE `idarticle`= :id";
+
+    // On va traiter nos variables post avant une éventuelle mise à jour
+
+
+    $title = htmlspecialchars(trim(strip_tags($datas['title'])),ENT_QUOTES);
+
+    // création du slug depuis le title
+    $slug = htmlspecialchars(trim(strip_tags($datas['slug'])),ENT_QUOTES);
+
+
+    if (
+        empty($title) ||
+        empty($slug) ||
+        strlen($title) > 160 ||
+        strlen($slug) > 165) return false;
+
+    // on va encoder le text
+    $text = htmlspecialchars(trim(strip_tags($datas['articletext'])), ENT_QUOTES);
+
+    $iduser = (int) $datas['user_iduser'];
+
+    // si vide
+    if (empty($text)) return false;
+
+    // on vérifie si publié
+    if (isset($datas['articlepublished'])) {
+        $isPublished = 1;
+        $datePublished = $datas['articledatepublished'] === "" ? date("Y-m-d H:i:s") : $datas['articledatepublished'];
+    } else {
+        $isPublished = 0;
+        $datePublished = null;
+    }
+    $prepare = $connection->prepare($sql);
+
+    try{
+        $prepare->bindValue("id",$idarticle,PDO::PARAM_INT);
+        $prepare->bindValue("userid",$iduser,PDO::PARAM_INT);
+        $prepare->bindValue("date",$datePublished);
+        $prepare->bindValue("published",$isPublished,PDO::PARAM_INT);
+        $prepare->bindValue("text",$text);
+        $prepare->bindValue("slug",$slug);
+        $prepare->bindValue("title",$title,);
+
+        $prepare->execute();
+        return true;
+
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+
+}
+
 /**
  * Supprime un article
  * @param PDO $connexion
@@ -108,6 +177,12 @@ function deleteArticle(PDO $connexion, int $id): bool
     }
 }
 
+/**
+ * @param PDO $con
+ * @param array $datas
+ * @return bool
+ * @throws \Random\RandomException
+ */
 function insertArticle(PDO $con, array $datas): bool
 {
     // id de l'utilisateur connecté

@@ -157,6 +157,7 @@ License: https://freebootstrap.net/license
                 ?>
                 <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">Formulaire</span>
                 <form class="<?=$displayForm?>" action="" method="post" name="insertion">
+                    <input type="hidden" name="idarticle" value="<?=$article['idarticle']?>"/>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Votre titre</label>
                         <input type="text" name="title"  class="form-control" id="exampleFormControlInput1" placeholder="titre" value="<?=$article['title']?>">

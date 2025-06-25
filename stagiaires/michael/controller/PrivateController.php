@@ -52,6 +52,16 @@ if (!isset($_GET['pg'])) {
         $displayError = "d-none";
         $displayForm = "";
 
+        // on a envoyé le formulaire
+        if(isset(
+            $_POST['title'],
+            $_POST['user_iduser'],
+            $_POST['idarticle']
+        )){
+
+            $updateForm = updateArticleById($db,$_POST,$_GET['idarticle']);
+        }
+
         $article = selectOneArticleById($db,$idarticle);
         $users = selectAllUser($db);
 
