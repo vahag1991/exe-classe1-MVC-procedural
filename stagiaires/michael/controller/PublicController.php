@@ -13,6 +13,9 @@ if (!isset($_GET['pg'])) {
 // chargement des articles
     $articles = selectAllPlublishedArticle($db);
 
+    // pour charger les articles en json
+    if(isset($_GET['json'])) echo json_encode($articles);
+
 // chargement du template de l'accueil
     require_once "../view/homepage.html.php";
 // existence de pg

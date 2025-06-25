@@ -188,7 +188,7 @@ License: https://freebootstrap.net/license
                         <td><?= $article['articledatepublished']===null?"Pas de date":substr($article['articledatepublished'],0,10)?></td>
                         <td><?=$article['login']?></td>
                         <td><a class="text-decoration-none" href="?pg=update&idarticle=<?=$article['idarticle']?>"><p class="bg-success p-2 rounded ">Modifier</p></a></td>
-                        <td><p onclick="confirm('Voulez-vous vraiment supprimer l\'article : \n <?=addslashes($article['title']); // pour mettre des slashs devant les "'" ?>')? window.location.href='./?pg=delete&idarticle=<?=$article['idarticle']?>' :'';" class="bg-danger p-2 rounded">Supprimer</p></td>
+                        <td><p onclick="confirm('Voulez-vous vraiment supprimer l\'article : \n <?=addslashes(html_entity_decode($article['title'])); // pour mettre des slashs devant les "'" ?>')? window.location.href='./?pg=delete&idarticle=<?=$article['idarticle']?>' :'';" class="bg-danger p-2 rounded">Supprimer</p></td>
                     </tr>
                         <?php
                     endforeach;
