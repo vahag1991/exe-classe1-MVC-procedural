@@ -5,6 +5,12 @@
 require_once "../model/ArticleModel.php";
 require_once "../model/UserModel.php";
 
+// pour charger les articles en json
+if(isset($_GET['json'])) {
+    $articles = selectAllPlublishedArticle($db);
+    echo json_encode($articles);
+    exit();
+}
 
 // homepage
 
@@ -13,8 +19,7 @@ if (!isset($_GET['pg'])) {
 // chargement des articles
     $articles = selectAllPlublishedArticle($db);
 
-    // pour charger les articles en json
-    if(isset($_GET['json'])) echo json_encode($articles);
+
 
 // chargement du template de l'accueil
     require_once "../view/homepage.html.php";
